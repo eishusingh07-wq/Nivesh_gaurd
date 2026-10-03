@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NiveshGuard | Secure Wealth</title>
+    
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* =========================================================
+           1. ROOT VARIABLES & GLOBAL STYLES
+        ========================================================= */
+        :root {
+            --bg-deep: #2a115c;
+            --bg-gradient: linear-gradient(135deg, #1b0a3a 0%, #39177a 100%);
+            --text-light: #ffffff;
+            --text-dark: #0f172a;
+            --text-gray: #64748b;
+            --card-bg: #ffffff;
+            --primary: #4f46e5;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: #e2e8f0;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            background: var(--bg-gradient); 
+            color: var(--text-light); 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+        }
+
+        /* =========================================================
+           2. PROMO BANNER & NAVBAR
+        ========================================================= */
+        .promo-banner { 
+            background: #e0e7ff; 
+            color: #1e3a8a; 
+            text-align: center; 
+            padding: 10px; 
+            font-size: 14px; 
+            font-weight: 500; 
+        }
+        
+        .navbar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 5%; 
+            max-width: 1400px; 
+            margin: auto; 
+        }
+        
+        .nav-logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            font-family: 'Outfit', sans-serif; 
+            font-size: 24px; 
+            font-weight: 800; 
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 30px; 
+            font-weight: 500; 
+            font-size: 15px; 
+        }
+        
+        .nav-links span { 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        
+        .nav-links span:hover { 
+            opacity: 0.7; 
+            color: #c7d2fe; 
+        }
+        
+        .nav-auth { 
+            display: flex; 
+            gap: 15px; 
+            align-items: center; 
+        }
+        
+        .btn-lang { 
+            background: #f59e0b; 
+            color: white; 
+            padding: 8px 15px; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            border: none; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        
+        .btn-lang:hover { 
+            background: #d97706; 
+        }
+        
+        .btn-outline { 
+            border: 1px solid rgba(255,255,255,0.4); 
+            background: transparent; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: 0.3s; 
+        }
+        
+        .btn-outline:hover { 
+            border-color: white; 
+        }
+        
+        .btn-solid { 
+            background: white; 
+            color: var(--bg-deep); 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            border: none; 
+            font-weight: 700; 
+            transition: 0.3s; 
+        }
+        
+        .btn-solid:hover { 
+            background: #f1f5f9; 
+        }
+
+        /* =========================================================
+           3. HERO SECTION & LOGIN CARD
+        ========================================================= */
+        .hero-container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            max-width: 1200px; 
+            margin: 40px auto; 
+            padding: 0 5%; 
+            gap: 50px; 
+        }
+        
+        .hero-text { 
+            flex: 1; 
+        }
+        
+        .hero-text h3 { 
+            font-family: 'Outfit'; 
+            font-size: 24px; 
+            font-weight: 600; 
+            margin-bottom: 5px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        
+        .hero-text h1 { 
+            font-family: 'Outfit'; 
+            font-size: 70px; 
+            font-weight: 900; 
+            line-height: 1.1; 
+            margin: 0 0 10px 0; 
+            letter-spacing: -2px; 
+        }
+        
+        .hero-text h2 { 
+            font-family: 'Outfit'; 
+            font-size: 40px; 
+            font-weight: 400; 
+            font-style: italic; 
+            margin: 0 0 30px 0; 
+            color: #c7d2fe; 
+        }
+        
+        .feature-list { 
+            list-style: none; 
+            padding: 0; 
+            margin-bottom: 40px; 
+        }
+        
+        .feature-list li { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            margin-bottom: 15px; 
+            font-size: 16px; 
+            font-weight: 500; 
+        }
+        
+        .feature-list .material-icons-round { 
+            background: rgba(255,255,255,0.1); 
+            padding: 5px; 
+            border-radius: 50%; 
+            font-size: 20px; 
+        }
+
+        .hero-visual { 
+            flex: 1; 
+            display: flex; 
+            justify-content: flex-end; 
+            perspective: 1000px; 
+        }
+        
+        .login-card { 
+            background: var(--card-bg); 
+            color: var(--text-dark); 
+            width: 100%; 
+            max-width: 420px; 
+            border-radius: 24px; 
+            padding: 40px 35px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3); 
+            transform: rotateY(-5deg) rotateX(5deg); 
+            transition: 0.5s; 
+        }
+        
+        .login-card:hover { 
+            transform: rotateY(0) rotateX(0); 
+        }
+        
+        .login-card h2 { 
+            font-family: 'Outfit'; 
+            font-size: 28px; 
+            margin: 0 0 10px 0; 
+            color: var(--bg-deep); 
+        }
+        
+        .input-wrapper { 
+            position: relative; 
+            margin-bottom: 20px; 
+        }
+        
+        .input-wrapper .material-icons-round { 
+            position: absolute; 
+            left: 15px; 
+            top: 15px; 
+            color: #94a3b8; 
+        }
+        
+        .form-control { 
+            width: 100%; 
+            box-sizing: border-box; 
+            padding: 15px 15px 15px 50px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            font-size: 15px; 
+            font-family: 'Inter'; 
+            background: #f8fafc; 
+            transition: 0.3s; 
+        }
+        
+        .form-control:focus { 
+            border-color: var(--primary); 
+            background: #fff; 
+            outline: none; 
+        }
+        
+        .btn-primary { 
+            background: var(--primary); 
+            color: white; 
+            width: 100%; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        
+        .btn-primary:hover { 
+            background: #4338ca; 
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3); 
+        }
+
+        /* =========================================================
+           4. DASHBOARD & WIDGETS
+        ========================================================= */
+        #dashboard-view { 
+            display: none; 
+            padding: 40px 5%; 
+            max-width: 1200px; 
+            margin: auto; 
+        }
+        
+        .dash-grid { 
+            display: grid; 
+            grid-template-columns: 1.15fr 0.85fr; 
+            gap: 30px; 
+        }
+        
+        .dash-card { 
+            background: var(--card-bg); 
+            color: var(--text-dark); 
+            border-radius: 20px; 
+            padding: 30px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+        }
+        
+        .dash-card-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+            border-bottom: 1px solid var(--border); 
+            padding-bottom: 15px; 
+        }
+        
+        .dash-card-header h3 { 
+            font-family: 'Outfit'; 
+            font-size: 22px; 
+            margin: 0; 
+            color: var(--bg-deep); 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+        
+        .dash-card-header .icon { 
+            color: var(--primary); 
+            background: #e0e7ff; 
+            padding: 8px; 
+            border-radius: 10px; 
+        }
+
+        .wealth-dashboard-top { 
+            display: grid; 
+            grid-template-columns: 1.2fr 0.8fr; 
+            gap: 20px; 
+            margin-bottom: 20px; 
+        }
+        
+        .wealth-widget { 
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+            color: white; 
+            padding: 25px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between;
+        }
+        
+        .wealth-widget h4 { 
+            margin: 0 0 5px 0; 
+            font-weight: 500; 
+            font-size: 14px; 
+            opacity: 0.9; 
+        }
+        
+        .wealth-widget h2 { 
+            margin: 0 0 10px 0; 
+            font-size: 38px; 
+            font-family: 'Outfit'; 
+            letter-spacing: -1px;
+        }
+        
+        .btn-share { 
+            background: rgba(255,255,255,0.2); 
+            border: none; 
+            color: white; 
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 5px; 
+            width: fit-content;
+        }
+        
+        .btn-share:hover { 
+            background: rgba(255,255,255,0.3); 
+        }
+        
+        .chart-card { 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 16px; 
+            padding: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 180px; 
+            position: relative;
+        }
+
+        /* =========================================================
+           5. DEADMAN'S SWITCH (LEGACY ALERT)
+        ========================================================= */
+        .deadman-box { 
+            background: rgba(0,0,0,0.15); 
+            padding: 12px; 
+            border-radius: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 15px; 
+        }
+        
+        .switch { 
+            position: relative; 
+            display: inline-block; 
+            width: 40px; 
+            height: 20px; 
+        }
+        
+        .switch input { 
+            opacity: 0; 
+            width: 0; 
+            height: 0; 
+        }
+        
+        .slider { 
+            position: absolute; 
+            cursor: pointer; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background-color: rgba(255,255,255,0.3); 
+            transition: .4s; 
+            border-radius: 20px; 
+        }
+        
+        .slider:before { 
+            position: absolute; 
+            content: ""; 
+            height: 16px; 
+            width: 16px; 
+            left: 2px; 
+            bottom: 2px; 
+            background-color: white; 
+            transition: .4s; 
+            border-radius: 50%; 
+        }
+        
+        input:checked + .slider { 
+            background-color: #f59e0b; 
+        }
+        
+        input:checked + .slider:before { 
+            transform: translateX(20px); 
+        }
+
+        /* =========================================================
+           6. FORMS, TABLES & BADGES
+        ========================================================= */
+        .progress-bar-bg { 
+            background: #f1f5f9; 
+            height: 8px; 
+            border-radius: 10px; 
+            margin: 15px 0; 
+            overflow: hidden; 
+        }
+        
+        .progress-fill { 
+            background: var(--success); 
+            height: 100%; 
+            width: 0%; 
+            transition: 1s; 
+        }
+        
+        .dash-form-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            margin-bottom: 15px; 
+        }
+        
+        .form-control-dash { 
+            width: 100%; 
+            box-sizing: border-box; 
+            padding: 12px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 10px; 
+            font-size: 14px; 
+            font-family: 'Inter'; 
+            background: #f8fafc; 
+            transition: 0.3s; 
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            font-size: 13.5px; 
+        }
+        
+        th { 
+            text-align: left; 
+            padding: 10px; 
+            color: var(--text-gray); 
+            border-bottom: 2px solid var(--border); 
+            font-weight: 600; 
+        }
+        
+        td { 
+            padding: 12px 10px; 
+            border-bottom: 1px solid var(--border); 
+            font-weight: 500; 
+        }
+        
+        .badge { 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            font-size: 11px; 
+            font-weight: 600; 
+        }
+        
+        .badge-safe { background: #d1fae5; color: #059669; }
+        .badge-warn { background: #fee2e2; color: #dc2626; }
+        .badge-withdrawn { background: #e2e8f0; color: #64748b; }
+        
+        .btn-wa { 
+            background: #10b981; 
+            color: white; 
+            border: none; 
+            padding: 5px 8px; 
+            border-radius: 6px; 
+            font-size: 11px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 4px; 
+            margin-left: 8px;
+        }
+        
+        .btn-action { 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            padding: 5px; 
+            transition: 0.2s; 
+            border-radius: 5px; 
+        }
+        
+        .btn-action:hover { 
+            background: #f1f5f9; 
+        }
+
+        /* =========================================================
+           7. AI TERMINAL & TTS
+        ========================================================= */
+        .ai-terminal { 
+            background: #f8fafc; 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            padding: 15px; 
+            color: var(--text-dark); 
+            font-family: 'Inter'; 
+            font-size: 14px; 
+            height: 180px; 
+            overflow-y: auto; 
+            margin-top: 15px; 
+            line-height: 1.5; 
+        }
+        
+        .tts-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #e2e8f0; 
+            padding-bottom: 10px; 
+            margin-bottom: 10px; 
+            color: #64748b; 
+            font-weight: 600;
+        }
+        
+        .btn-mic { 
+            background: #4f46e5; 
+            color: white; 
+            border: none; 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 5px;
+        }
+
+        /* =========================================================
+           8. TOAST NOTIFICATION & FOOTER
+        ========================================================= */
+        #toast { 
+            visibility: hidden; 
+            min-width: 250px; 
+            background-color: #333; 
+            color: #fff; 
+            text-align: center; 
+            border-radius: 8px; 
+            padding: 16px; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 50%; 
+            bottom: 30px; 
+            transform: translateX(-50%); 
+            font-weight: 500;
+        }
+        
+        #toast.show { 
+            visibility: visible; 
+            animation: fadein 0.5s, fadeout 0.5s 2.5s; 
+        }
+        
+        @keyframes fadein { 
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;} 
+        }
+        
+        @keyframes fadeout { 
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;} 
+        }
+
+        .footer { 
+            text-align: center; 
+            padding: 20px; 
+            color: rgba(255,255,255,0.6); 
+            font-size: 13px; 
+            margin-top: 40px; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+        }
+        
+        /* =========================================================
+           9. PRINT & RESPONSIVE MEDIA QUERIES
+        ========================================================= */
+        @media print {
+            body { 
+                background: white; 
+                color: black; 
+            }
+            .promo-banner, 
+            .navbar, 
+            .dash-card:nth-child(2), 
+            .dash-form-grid, 
+            .btn-primary, 
+            .footer, 
+            .btn-share, 
+            .btn-wa, 
+            .deadman-box, 
+            .btn-action, 
+            th:last-child, 
+            td:last-child { 
+                display: none !important; 
+            }
+            #dashboard-view { 
+                padding: 0; 
+                margin: 0; 
+                width: 100%; 
+                max-width: 100%; 
+            }
+            .dash-grid { 
+                display: block; 
+            }
+            .dash-card { 
+                box-shadow: none; 
+                padding: 0; 
+                border: none; 
+            }
+            .wealth-dashboard-top { 
+                display: block; 
+            }
+            .chart-card { 
+                display: none; 
+            }
+            .wealth-widget { 
+                background: white !important; 
+                color: black !important; 
+                border: 2px solid black; 
+                box-shadow: none; 
+                margin-bottom: 20px;
+            }
+            table { 
+                border: 1px solid black; 
+            }
+            th, td { 
+                border: 1px solid black !important; 
+            }
+        }
+
+        @media (max-width: 900px) { 
+            .hero-container, 
+            .dash-grid, 
+            .wealth-dashboard-top { 
+                flex-direction: column; 
+                grid-template-columns: 1fr; 
+            } 
+            .hero-text h1 { 
+                font-size: 50px; 
+            } 
+            .login-card { 
+                transform: none; 
+            } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PROMO BANNER -->
+    <div class="promo-banner lang-switch" data-en="Secure your financial legacy today. Free Smart Grievance drafting & nominee tracking forever." data-hi="आज ही अपनी वित्तीय विरासत सुरक्षित करें। मुफ़्त शिकायत प्रारूप और नॉमिनी ट्रैकिंग।">
+        Secure your financial legacy today. Free Smart Grievance drafting & nominee tracking forever.
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-logo">
+            <span class="material-icons-round" style="font-size: 28px;">admin_panel_settings</span> 
+            NiveshGuard
+        </div>
+        <div class="nav-links" id="nav-links">
+            <span class="lang-switch" data-en="Features" data-hi="सुविधाएं">Features</span>
+            <span class="lang-switch" data-en="Security" data-hi="सुरक्षा">Security</span>
+            <span class="lang-switch" data-en="Learn" data-hi="सीखें">Learn</span>
+        </div>
+        <div class="nav-auth">
+            <button class="btn-lang" id="langBtn" onclick="toggleLanguage()">हिन्दी / EN</button>
+            <button class="btn-outline lang-switch" id="nav-login-btn" onclick="showLogin()" data-en="Log in" data-hi="लॉग इन">Log in</button>
+            <button class="btn-solid lang-switch" id="nav-action-btn" onclick="showLogin()" data-en="Get started" data-hi="शुरू करें">Get started</button>
+        </div>
+    </nav>
+
+    <!-- ================= VIEW 1: HERO / LOGIN PAGE ================= -->
+    <div id="landing-view" class="hero-container">
+        
+        <div class="hero-text">
+            <h3>
+                <span class="material-icons-round">star_border</span> 
+                <span class="lang-switch" data-en="Protect Your Family's Wealth" data-hi="अपने परिवार की संपत्ति सुरक्षित करें">Protect Your Family's Wealth</span>
+            </h3>
+            
+            <h1 class="lang-switch" data-en="100% Secure &<br>Tracked Assets" data-hi="100% सुरक्षित और<br>ट्रैक्ड संपत्ति">
+                100% Secure &<br>Tracked Assets
+            </h1>
+            
+            <h2 class="lang-switch" data-en="Better than manual records." data-hi="मैनुअल रिकॉर्ड से कहीं बेहतर।">
+                Better than manual records.
+            </h2>
+            
+            <ul class="feature-list">
+                <li>
+                    <span class="material-icons-round">account_balance</span> 
+                    <span class="lang-switch" data-en="Track Net Worth & Fixed Deposits seamlessly." data-hi="अपनी कुल संपत्ति और एफडी को आसानी से ट्रैक करें।">Track Net Worth & Fixed Deposits seamlessly.</span>
+                </li>
+                <li>
+                    <span class="material-icons-round">print</span> 
+                    <span class="lang-switch" data-en="Generate & Print 'Family Asset Report' instantly." data-hi="तुरंत 'पारिवारिक संपत्ति रिपोर्ट' बनाएं और प्रिंट करें।">Generate & Print 'Family Asset Report' instantly.</span>
+                </li>
+                <li>
+                    <span class="material-icons-round">timer</span> 
+                    <span class="lang-switch" data-en="Smart Legacy Alert (Deadman's Switch) for safety." data-hi="सुरक्षा के लिए स्मार्ट लिगेसी अलर्ट (डेडमैन स्विच)।">Smart Legacy Alert (Deadman's Switch) for safety.</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="hero-visual">
+            <div class="login-card">
+                <h2 class="lang-switch" data-en="Portal Access" data-hi="पोर्टल एक्सेस">Portal Access</h2>
+                
+                <div class="input-wrapper">
+                    <span class="material-icons-round">account_balance_wallet</span>
+                    <input type="text" id="accNumber" class="form-control" placeholder="Account / ID Number" maxlength="12">
+                </div>
+                
+                <div class="input-wrapper">
+                    <span class="material-icons-round">dialpad</span>
+                    <input type="password" id="pin" class="form-control" placeholder="4-Digit Secure PIN" maxlength="4">
+                </div>
+                
+                <button class="btn-primary lang-switch" onclick="loginUser()" data-en="Log in securely" data-hi="सुरक्षित रूप से लॉग इन करें">Log in securely</button>
+                
+                <p id="loginError" style="color: var(--danger); font-size: 13px; text-align: center; margin-top: 15px; display: none; font-weight: 500;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= VIEW 2: POST-LOGIN DASHBOARD ================= -->
+    <div id="dashboard-view">
+        <div class="dash-grid">
+            
+            <!-- Wealth Tracker Section -->
+            <div class="dash-card" style="overflow-x: auto;">
+                <div class="dash-card-header">
+                    <h3>
+                        <span class="material-icons-round icon">assured_workload</span> 
+                        <span class="lang-switch" data-en="Portfolio Vault" data-hi="पोर्टफोलियो तिजोरी">Portfolio Vault</span>
+                    </h3>
+                    <div style="font-size: 12px; color: var(--text-gray); font-weight: 600;" id="scoreText">Security Pending</div>
+                </div>
+
+                <div class="wealth-dashboard-top">
+                    <!-- Total Wealth Widget -->
+                    <div class="wealth-widget">
+                        <div>
+                            <h4 class="lang-switch" data-en="Total Active Family Wealth" data-hi="कुल सक्रिय पारिवारिक संपत्ति">Total Active Family Wealth</h4>
+                            <h2 id="totalWealth">₹0</h2>
+                            <button class="btn-share lang-switch" onclick="window.print()" data-en="Print Report" data-hi="रिपोर्ट प्रिंट करें">
+                                <span class="material-icons-round" style="font-size: 18px;">print</span> Print Report
+                            </button>
+                        </div>
+                        
+                        <!-- DEADMAN'S SWITCH -->
+                        <div class="deadman-box">
+                            <div style="font-size: 12.5px; line-height: 1.3;">
+                                <strong>
+                                    <span class="material-icons-round" style="font-size: 14px; vertical-align: middle;">timer</span> 
+                                    <span class="lang-switch" data-en="Legacy Alert" data-hi="लिगेसी अलर्ट">Legacy Alert</span>
+                                </strong><br>
+                                <span style="opacity: 0.85; font-size: 11px;" class="lang-switch" data-en="Auto-share report if inactive for 6 months." data-hi="6 महीने निष्क्रिय रहने पर रिपोर्ट साझा करें।">Auto-share report if inactive for 6 months.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" onchange="toggleDeadman(this)">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart.js Canvas -->
+                    <div class="chart-card">
+                        <canvas id="wealthChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <!-- ADD ASSET FORM -->
+                <div class="dash-form-grid">
+                    <input type="text" id="assetName" class="form-control-dash" placeholder="Asset Name (e.g. HDFC)">
+                    <input type="text" id="folioNumber" class="form-control-dash" placeholder="Folio No.">
+                    <input type="number" id="assetAmount" class="form-control-dash" placeholder="Amount (₹)">
+                    <input type="text" id="nomineeName" class="form-control-dash" placeholder="Nominee (Crucial)">
+                </div>
+                
+                <button class="btn-primary lang-switch" style="padding: 12px;" onclick="addAsset()" data-en="Save Asset Record" data-hi="संपत्ति रिकॉर्ड सहेजें">Save Asset Record</button>
+
+                <!-- TABLE WITH HISTORY & ACTIONS -->
+                <div style="overflow-x: auto;">
+                    <table style="min-width: 600px;">
+                        <thead>
+                            <tr>
+                                <th class="lang-switch" data-en="Date Added" data-hi="जोड़ने की तिथि">Date Added</th>
+                                <th class="lang-switch" data-en="Asset Detail" data-hi="संपत्ति विवरण">Asset Detail</th>
+                                <th class="lang-switch" data-en="Amount" data-hi="रकम">Amount</th>
+                                <th class="lang-switch" data-en="Status" data-hi="स्थिति">Status</th>
+                                <th class="lang-switch" data-en="Actions" data-hi="कार्रवाई">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assetList">
+                            <!-- Dynamic Rows will appear here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Smart Legal Engine Section -->
+            <div class="dash-card">
+                <div class="dash-card-header">
+                    <h3>
+                        <span class="material-icons-round icon">gavel</span> 
+                        <span class="lang-switch" data-en="Smart Legal Engine" data-hi="स्मार्ट कानूनी इंजन">Smart Legal Engine</span>
+                    </h3>
+                </div>
+                
+                <select id="issueType" class="form-control-dash" style="margin-bottom: 15px; width: 100%;">
+                    <option value="" disabled selected>-- Select your specific issue --</option>
+                    
+                    <optgroup label="Stock Brokers & Demat (SEBI)">
+                        <option value="Unauthorized Trading in Demat Account">Unauthorized Trading in Account</option>
+                        <option value="Hidden Brokerage or DP Charges">Hidden Brokerage / DP Charges</option>
+                        <option value="Non-Transfer of Shares to Demat">Non-Transfer of Shares</option>
+                    </optgroup>
+                    
+                    <optgroup label="Mutual Funds">
+                        <option value="Delay in Mutual Fund Redemption Payout">Delay in Redemption Payout</option>
+                        <option value="SIP Cancellation Ignored by AMC">SIP Cancellation Ignored</option>
+                    </optgroup>
+                    
+                    <optgroup label="Banking & Fixed Deposits (RBI)">
+                        <option value="Unauthorized Bank Transaction / Fraud">Unauthorized Bank Transaction</option>
+                        <option value="Fixed Deposit Interest Not Credited">Fixed Deposit Interest Not Credited</option>
+                    </optgroup>
+                </select>
+
+                <textarea id="rawComplaint" class="form-control-dash" rows="3" placeholder="Explain your issue in brief..."></textarea>
+                
+                <button class="btn-primary lang-switch" style="margin-top: 15px; background: var(--bg-deep);" onclick="generateComplaint()" data-en="Generate Legal Draft" data-hi="कानूनी ड्राफ्ट बनाएं">
+                    Generate Legal Draft
+                </button>
+
+                <div class="ai-terminal">
+                    <div class="tts-header">
+                        <span id="draftStatus">Status: Waiting for input...</span>
+                        <button onclick="speakDraft()" class="btn-mic">
+                            <span class="material-icons-round" style="font-size:16px">volume_up</span> 
+                            <span class="lang-switch" data-en="Listen" data-hi="सुने">Listen</span>
+                        </button>
+                    </div>
+                    <div id="draftOutput" style="color: #64748b; font-style: italic;">Draft will appear here instantly...</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast"></div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        &copy; 2026 NiveshGuard Project. Designed & Engineered with precision by <strong>Team Apex</strong>.
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // =========================================================
+        // 1. LANGUAGE TOGGLE LOGIC
+        // =========================================================
+        let currentLang = 'en';
+        
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            
+            // Update all elements with lang-switch class
+            const langElements = document.querySelectorAll('.lang-switch');
+            for (let i = 0; i < langElements.length; i++) {
+                langElements[i].innerHTML = langElements[i].getAttribute(`data-${currentLang}`);
+            }
+            
+            // Update Toggle Button Text
+            document.getElementById('langBtn').innerText = currentLang === 'en' ? 'हिन्दी / EN' : 'English / HI';
+            
+            // Update Input Placeholders manually
+            document.getElementById('accNumber').placeholder = currentLang === 'en' ? "Account / ID Number" : "खाता / आईडी नंबर";
+            document.getElementById('pin').placeholder = currentLang === 'en' ? "4-Digit Secure PIN" : "4-अंकीय सुरक्षित पिन";
+            document.getElementById('assetName').placeholder = currentLang === 'en' ? "Asset Name (e.g. HDFC)" : "संपत्ति का नाम";
+            document.getElementById('nomineeName').placeholder = currentLang === 'en' ? "Nominee (Crucial)" : "नॉमिनी (महत्वपूर्ण)";
+        }
+
+        // =========================================================
+        // 2. NAVIGATION & LOGIN LOGIC
+        // =========================================================
+        function showLogin() {
+            document.getElementById('landing-view').style.display = 'flex';
+            document.getElementById('dashboard-view').style.display = 'none';
+            
+            // UI Reset for Login Page
+            document.getElementById('nav-links').style.display = 'flex';
+            document.getElementById('nav-login-btn').style.display = 'block';
+            
+            const actionBtn = document.getElementById('nav-action-btn');
+            actionBtn.innerText = currentLang === 'en' ? 'Get started' : 'शुरू करें';
+            actionBtn.setAttribute('data-en', 'Get started');
+            actionBtn.setAttribute('data-hi', 'शुरू करें');
+            actionBtn.setAttribute('onclick', 'showLogin()');
+        }
+
+        function showDashboard() {
+            document.getElementById('landing-view').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            
+            // UI Update for Dashboard (Hide extra buttons, show Log out)
+            document.getElementById('nav-links').style.display = 'none';
+            document.getElementById('nav-login-btn').style.display = 'none';
+            
+            const actionBtn = document.getElementById('nav-action-btn');
+            actionBtn.innerText = currentLang === 'en' ? 'Log out' : 'लॉग आउट';
+            actionBtn.setAttribute('data-en', 'Log out');
+            actionBtn.setAttribute('data-hi', 'लॉग आउट');
+            actionBtn.setAttribute('onclick', 'logoutUser()');
+        }
+
+        async function loginUser() {
+            const accNumber = document.getElementById('accNumber').value;
+            const pin = document.getElementById('pin').value;
+            
+            // Simple validation: ID must be > 5 chars, PIN must be exactly 4 chars
+            if(accNumber.length > 5 && pin.length === 4) { 
+                showDashboard(); 
+                fetchAssets(); 
+            } else { 
+                const errorDisplay = document.getElementById('loginError');
+                errorDisplay.innerText = "Invalid details. Use any 6+ digit ID and 4 digit PIN."; 
+                errorDisplay.style.display = 'block'; 
+            }
+        }
+
+        function logoutUser() {
+            // Clear inputs and return to login
+            document.getElementById('accNumber').value = '';
+            document.getElementById('pin').value = '';
+            showLogin();
+        }
+
+        // =========================================================
+        // 3. TOAST NOTIFICATIONS (DEADMAN & WHATSAPP)
+        // =========================================================
+        function toggleDeadman(checkbox) {
+            const toast = document.getElementById("toast");
+            
+            if(checkbox.checked) {
+                toast.innerHTML = `<span class="material-icons-round" style="vertical-align:middle; color:#10b981;">security</span> Smart Legacy Alert ACTIVATED!`;
+            } else {
+                toast.innerHTML = `<span class="material-icons-round" style="vertical-align:middle; color:#ef4444;">gpp_bad</span> Smart Legacy Alert DEACTIVATED.`;
+            }
+            
+            toast.className = "show";
+            
+            // Hide toast after 4 seconds
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 4000);
+        }
+
+        function sendWhatsAppAlert(assetName) {
+            const toast = document.getElementById("toast");
+            toast.innerHTML = `<span class="material-icons-round" style="vertical-align:middle; color:#25D366;">check_circle</span> WhatsApp reminder sent for ${assetName}!`;
+            toast.className = "show";
+            
+            // Hide toast after 3 seconds
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 3000);
+        }
+
+        // =========================================================
+        // 4. CHART.JS LOGIC
+        // =========================================================
+        let wealthChartInstance = null;
+        
+        function updateChart(activeAssets) {
+            const ctx = document.getElementById('wealthChart').getContext('2d');
+            
+            // Extract labels and amounts from array
+            const labels = activeAssets.map(function(a) { return a.assetName; });
+            const data = activeAssets.map(function(a) { return parseFloat(a.amount) || 0; });
+
+            // Destroy previous chart instance to avoid overlaps
+            if (wealthChartInstance) {
+                wealthChartInstance.destroy();
+            }
+
+            // If no data exists, render a gray empty donut
+            if (data.length === 0 || data.every(function(val) { return val === 0; })) {
+                wealthChartInstance = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: { 
+                        labels: ['No Assets'], 
+                        datasets: [{ 
+                            data: [1], 
+                            backgroundColor: ['#e2e8f0'] 
+                        }] 
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false, 
+                        plugins: { legend: { display: false } }, 
+                        cutout: '75%' 
+                    }
+                });
+                return;
+            }
+
+            // Render Real Data
+            wealthChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'],
+                        borderWidth: 0, 
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { 
+                            display: true, 
+                            position: 'right', 
+                            labels: { boxWidth: 10, font: {size: 11} } 
+                        } 
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        // =========================================================
+        // 5. ASSET MANAGEMENT & WITHDRAWAL LOGIC
+        // =========================================================
+        function fetchAssets() {
+            // Retrieve data from browser's local storage
+            let assets = JSON.parse(localStorage.getItem('niveshGuardAssets')) || [];
+            
+            let html = '';
+            let activeCount = 0;
+            let safeCount = 0;
+            let totalAmount = 0;
+            let activeAssetsForChart = [];
+
+            // Loop through each asset
+            assets.forEach(function(a, index) {
+                let isWithdrawn = a.isWithdrawn || false;
+                
+                // Track metrics only for active (non-withdrawn) assets
+                if(!isWithdrawn) {
+                    activeCount++;
+                    totalAmount += a.amount || 0;
+                    
+                    if(!a.status.includes('Warning')) {
+                        safeCount++;
+                    }
+                    activeAssetsForChart.push(a);
+                }
+
+                // Determine Badges and Styles
+                let badgeClass = isWithdrawn ? 'badge-withdrawn' : (a.status.includes('Warning') ? 'badge-warn' : 'badge-safe');
+                let displayStatus = isWithdrawn ? 'Closed / Withdrawn' : a.status;
+                let rowStyle = isWithdrawn ? 'opacity: 0.6; background: #f8fafc;' : '';
+                
+                // Format Currency
+                let formattedAmt = (a.amount || 0).toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
+                let amountText = isWithdrawn ? `<del>${formattedAmt}</del>` : formattedAmt;
+                
+                // WhatsApp Button Logic
+                let waButton = (!isWithdrawn && a.status.includes('Warning')) ? `<button class="btn-wa" onclick="sendWhatsAppAlert('${a.assetName}')">Alert</button>` : '';
+                
+                // Action Buttons Logic
+                let withdrawIcon = isWithdrawn ? 'undo' : 'money_off';
+                let withdrawTitle = isWithdrawn ? 'Undo Withdrawal' : 'Mark as Withdrawn';
+                let withdrawColor = isWithdrawn ? '#4f46e5' : '#f59e0b';
+
+                let actionButtons = `
+                    <button class="btn-action" onclick="toggleWithdraw(${index})" title="${withdrawTitle}" style="color:${withdrawColor};">
+                        <span class="material-icons-round" style="font-size:18px;">${withdrawIcon}</span>
+                    </button>
+                    <button class="btn-action" onclick="deleteAsset(${index})" title="Delete Record" style="color:#ef4444;">
+                        <span class="material-icons-round" style="font-size:18px;">delete</span>
+                    </button>
+                `;
+
+                // Build Table Row HTML
+                html += `<tr style="${rowStyle}">
+                    <td style="color:#64748b; font-size:12.5px;">${a.dateAdded || 'N/A'}</td>
+                    <td><strong>${a.assetName}</strong><br><small style="color:#64748b">A/c: ${a.folioNumber || 'N/A'} | Nominee: ${a.nomineeName || '-'}</small></td>
+                    <td style="font-weight:600;">${amountText}</td>
+                    <td><span class="badge ${badgeClass}">${displayStatus}</span> ${waButton}</td>
+                    <td>${actionButtons}</td>
+                </tr>`;
+            });
+            
+            // Render Table and Total Value
+            document.getElementById('assetList').innerHTML = html;
+            document.getElementById('totalWealth').innerText = totalAmount.toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
+
+            // Calculate and Render Progress Bar
+            let percentage = activeCount === 0 ? 0 : Math.round((safeCount / activeCount) * 100);
+            document.getElementById('progressBar').style.width = percentage + '%';
+            
+            let score = document.getElementById('scoreText');
+            if(percentage === 100 && activeCount > 0) {
+                score.innerHTML = `<span style="color:var(--success)">100% Active Vault Secured</span>`;
+                document.getElementById('progressBar').style.background = 'var(--success)';
+            } else if(activeCount > 0) {
+                score.innerHTML = `<span style="color:var(--danger)">Warning: ${percentage}% Active Safe</span>`;
+                document.getElementById('progressBar').style.background = 'var(--danger)';
+            } else {
+                score.innerHTML = `<span>No Active Assets</span>`;
+            }
+            
+            // Update Chart Visuals
+            updateChart(activeAssetsForChart);
+        }
+
+        function addAsset() {
+            const assetName = document.getElementById('assetName').value;
+            const folioNumber = document.getElementById('folioNumber').value;
+            const nomineeName = document.getElementById('nomineeName').value;
+            const amount = parseFloat(document.getElementById('assetAmount').value) || 0;
+            
+            // Validation
+            if(!assetName) {
+                return alert(currentLang === 'en' ? 'Asset name is mandatory!' : 'संपत्ति का नाम अनिवार्य है!');
+            }
+            
+            // Generate exact date format (e.g., Sat, 03 Oct 2026)
+            const options = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
+            const dateAdded = new Intl.DateTimeFormat('en-IN', options).format(new Date());
+
+            // Build Asset Object
+            const newAsset = { 
+                assetName: assetName, 
+                folioNumber: folioNumber, 
+                nomineeName: nomineeName, 
+                amount: amount, 
+                dateAdded: dateAdded, 
+                status: nomineeName ? 'Safe' : 'Warning: Nominee Missing',
+                isWithdrawn: false
+            };
+            
+            // Save to LocalStorage
+            let localAssets = JSON.parse(localStorage.getItem('niveshGuardAssets')) || [];
+            localAssets.unshift(newAsset); 
+            localStorage.setItem('niveshGuardAssets', JSON.stringify(localAssets));
+            
+            // Clear Input Fields
+            document.getElementById('assetName').value = '';
+            document.getElementById('folioNumber').value = '';
+            document.getElementById('nomineeName').value = '';
+            document.getElementById('assetAmount').value = '';
+            
+            // Refresh Dashboard UI
+            fetchAssets();
+        }
+
+        function toggleWithdraw(index) {
+            let localAssets = JSON.parse(localStorage.getItem('niveshGuardAssets')) || [];
+            
+            // Toggle boolean value
+            localAssets[index].isWithdrawn = !localAssets[index].isWithdrawn;
+            
+            localStorage.setItem('niveshGuardAssets', JSON.stringify(localAssets));
+            fetchAssets();
+        }
+
+        function deleteAsset(index) {
+            let confirmMsg = currentLang === 'en' ? 'Are you sure you want to permanently delete this record?' : 'क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?';
+            
+            if(confirm(confirmMsg)) {
+                let localAssets = JSON.parse(localStorage.getItem('niveshGuardAssets')) || [];
+                
+                // Remove 1 item at the specific index
+                localAssets.splice(index, 1);
+                
+                localStorage.setItem('niveshGuardAssets', JSON.stringify(localAssets));
+                fetchAssets();
+            }
+        }
+
+        // =========================================================
+        // 6. SMART LEGAL ENGINE LOGIC
+        // =========================================================
+        async function generateComplaint() {
+            const issueType = document.getElementById('issueType').value;
+            const rawComplaint = document.getElementById('rawComplaint').value;
+            
+            // Validation
+            if(!issueType || !rawComplaint) {
+                return alert('Please select an issue type and enter brief details.');
+            }
+            
+            const outputBox = document.getElementById('draftOutput');
+            outputBox.style.color = "var(--text-dark)";
+            document.getElementById('draftStatus').innerText = "Status: Draft Ready ✅";
+            
+            // Generate Offline Draft Text
+            const date = new Date().toLocaleDateString('en-IN');
+            
+            const draftHtml = `Date: ${date}<br><br>` +
+                              `To,<br>` +
+                              `The Grievance Redressal Officer,<br>` +
+                              `SEBI SCORES / Respective Bank<br><br>` +
+                              `Subject: Formal Complaint regarding ${issueType}.<br><br>` +
+                              `Respected Sir/Madam,<br><br>` +
+                              `I am writing to formally report an issue regarding my financial account.<br><br>` +
+                              `Details of the grievance:<br>"${rawComplaint}"<br><br>` +
+                              `I request you to kindly investigate this matter strictly and initiate a resolution or refund at the earliest.<br><br>` +
+                              `Thanking You,<br><br>` +
+                              `Yours Sincerely,<br>` +
+                              `[Your Name]<br>` +
+                              `[Account Number]`;
+                              
+            outputBox.innerHTML = draftHtml;
+        }
+
+        // =========================================================
+        // 7. TEXT TO SPEECH LOGIC
+        // =========================================================
+        function speakDraft() {
+            const outputBox = document.getElementById('draftOutput');
+            
+            // Remove HTML <br> tags and replace with periods for proper speaking pauses
+            const cleanText = outputBox.innerHTML.replace(/<br>/g, '. ').replace(/<[^>]*>?/g, ''); 
+            
+            if(!cleanText || cleanText.includes("Draft will appear")) {
+                return alert("Please generate a draft first before listening.");
+            }
+            
+            // Cancel any currently speaking audio
+            window.speechSynthesis.cancel(); 
+            
+            // Initialize new speech request
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.rate = 0.9; // Set speed slightly slower for senior citizens
+            
+            // Play Audio
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
